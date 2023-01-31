@@ -223,5 +223,6 @@ workflows:
   uda-peapole-workflow:
     jobs:
 
-
-      - run-migrations
+      - deploy-infrastructure
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]

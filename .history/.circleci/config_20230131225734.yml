@@ -216,12 +216,11 @@ jobs:
                   curl https://kvdb.io/Khva4g68NDMnFsTBCPCUuh/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
               fi
      # Here's where you will add some code to rollback on failure  
-      - destroy-environment:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       
 workflows:
   uda-peapole-workflow:
     jobs:
 
-
-      - run-migrations
+      - deploy-infrastructure
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]

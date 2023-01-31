@@ -224,4 +224,4 @@ workflows:
     jobs:
 
 
-      - run-migrations
+      - run-migrations:
