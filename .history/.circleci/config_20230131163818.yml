@@ -175,4 +175,5 @@ workflows:
   uda-peapole-workflow:
     jobs:
 
-      - deploy-infrastructure
+      - notify:
+          context: slack-secrets
