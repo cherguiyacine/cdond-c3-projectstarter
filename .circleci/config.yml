@@ -121,4 +121,4 @@ workflows:
     jobs:
 
       - notify:
-          context: slack-secrets
+          context: SLACK_ACCESS_TOKEN
