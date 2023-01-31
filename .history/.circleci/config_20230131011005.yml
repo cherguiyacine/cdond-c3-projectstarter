@@ -119,6 +119,15 @@ jobs:
 workflows:
   uda-peapole-workflow:
     jobs:
-
+      - build-frontend
+      - build-backend
+      - test-frontend:
+          requires: [build-frontend]
+      - test-backend:
+          requires: [build-backend]
+      - scan-frontend:
+          requires: [build-frontend]
+      - scan-backend:
+          requires: [build-backend]
       - notify:
           context: slack-secrets
