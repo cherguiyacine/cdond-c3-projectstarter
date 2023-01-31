@@ -183,21 +183,17 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            pip install awscli
-            apk add --update ansible
-            apk add --update --no-cache python3 py3-pip
-            /usr/local/bin/python -m pip install --upgrade pip
+            # Your code here
+            exit 1
       - run:
           name: Configure server
           command: |
-            cd .circleci/ansible
-            ansible-playbook -i inventory.txt configure-server.yml
+            # Your code here
+            exit 1
       # Here's where you will add some code to rollback on failure  
-      - destroy-environment:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       
 workflows:
   uda-peapole-workflow:
     jobs:
 
-      - configure-infrastructure
+      - deploy-infrastructure

@@ -177,27 +177,22 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys: 
-          fingerprints: ["38:7d:06:55:fb:36:60:83:84:f1:c8:e8:90:dc:85:af"]
-      - attach_workspace:
-          at: ~/
+          fingerprints: ["48:2b:dc:7b:92:72:30:8f:a1:ca:39:b5:5e:7f:91:47"]
+      # attach workspace
       - run:
           name: Install dependencies
           command: |
-            pip install awscli
-            apk add --update ansible
-            apk add --update --no-cache python3 py3-pip
-            /usr/local/bin/python -m pip install --upgrade pip
+            # Your code here
+            exit 1
       - run:
           name: Configure server
           command: |
-            cd .circleci/ansible
-            ansible-playbook -i inventory.txt configure-server.yml
+            # Your code here
+            exit 1
       # Here's where you will add some code to rollback on failure  
-      - destroy-environment:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       
 workflows:
   uda-peapole-workflow:
     jobs:
 
-      - configure-infrastructure
+      - deploy-infrastructure
