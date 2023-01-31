@@ -200,6 +200,4 @@ workflows:
   uda-peapole-workflow:
     jobs:
 
-      - deploy-infrastructure:
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
+      - configure-infrastructure
