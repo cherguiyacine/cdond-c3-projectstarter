@@ -225,10 +225,7 @@ workflows:
   uda-peapole-workflow:
     jobs:
 
-      - build-frontend
-      - build-backend
-      - deploy-infrastructure:
-          requires: [build-frontend, build-backend]
+      - deploy-infrastructure
       - configure-infrastructure:
           requires: [deploy-infrastructure]
       - run-migrations:
