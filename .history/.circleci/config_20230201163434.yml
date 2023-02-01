@@ -300,4 +300,6 @@ workflows:
   uda-peapole-workflow:
     jobs:
 
-      - deploy-frontend
+      - run-migrations
+      - deploy-frontend:
+          requires: [run-migrations]
