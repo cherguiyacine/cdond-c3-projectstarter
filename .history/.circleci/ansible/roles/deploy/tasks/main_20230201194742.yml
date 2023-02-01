@@ -16,7 +16,7 @@
       upgrade: yes
 
   - name: "Unarchive build artifact"
-    become: true
+    become: yes
     unarchive:
       src: "files/build-artifact.tar.gz"
       dest: .
