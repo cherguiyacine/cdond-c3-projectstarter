@@ -346,7 +346,7 @@ jobs:
           command: |
             URL="http://udapeople-eb26751.s3-website-us-east-1.amazonaws.com"            
             echo ${URL} 
-            if curl --connect-timeout 10 ${URL} | grep "Welcome"
+            if curl --connect-timeout 2000 ${URL} | grep "Welcome"
             then
               # Change this to 0 after the job fails
               return 0
