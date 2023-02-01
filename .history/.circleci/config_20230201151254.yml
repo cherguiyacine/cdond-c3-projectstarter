@@ -234,4 +234,6 @@ workflows:
     jobs:
 
 
-      - run-migrations
+      - run-migrations:
+          requires: [configure-infrastructure]
+
