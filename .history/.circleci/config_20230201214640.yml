@@ -344,7 +344,7 @@ jobs:
             pip install awscli
       
       - run:
-          name: Backend smoke test.
+          name: Get backend url
           command: |
             export BACKEND_IP=$(
               aws ec2 describe-instances \
@@ -354,7 +354,7 @@ jobs:
             )       
             API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
-            # Test backend
+
             if curl "${API_URL}/api/status" | grep "ok"
             then
                 return 0
