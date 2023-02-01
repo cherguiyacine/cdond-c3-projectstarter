@@ -305,6 +305,9 @@ workflows:
       - build-backend
       - deploy-infrastructure:
           requires: [build-frontend, build-backend]
+          filters:
+            branches:
+              only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
       - run-migrations:
