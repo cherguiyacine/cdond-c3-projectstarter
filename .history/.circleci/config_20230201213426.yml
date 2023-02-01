@@ -361,7 +361,7 @@ jobs:
           command: echo ${MY_ENV_VAR}
       - run:
           name: "What was my custom environments variable?"
-          command: echo ${API_URL}
+          command: echo ${MY_ENV_VAR}
       - run:
           name: Backend smoke test.
           command: |
