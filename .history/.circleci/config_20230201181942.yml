@@ -319,7 +319,7 @@ jobs:
             npm i
             npm run build
             cd ..
-
+            
             # Zip the directory
             tar -C backend -czvf artifact.tar.gz .
             cd .circleci/ansible
@@ -331,4 +331,13 @@ workflows:
   uda-peapole-workflow:
     jobs:
 
-      - deploy-backend
+      - build-frontend
+      - build-backend
+      - deploy-infrastructure:
+          requires: [build-frontend, build-backend]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
+      - deploy-frontend:
+          requires: [run-migrations]

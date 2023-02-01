@@ -301,34 +301,30 @@ jobs:
     docker:
       - image: python:3.8-alpine3.15
     steps:
-      - checkout
+      # Checkout code from git
       - add_ssh_keys: 
           fingerprints: ["38:7d:06:55:fb:36:60:83:84:f1:c8:e8:90:dc:85:af"]
-      - attach_workspace:
-          at: ~/
-      - restore_cache:
-          keys: [backend-build]
+      # attach workspace
       - run:
           name: Install dependencies
           command: |
-            apk add --update --no-cache tar gzip nodejs npm aws-cli ansible
+            # your code here
       - run:
           name: Deploy backend
           command: |
-            cd backend
-            npm i
-            npm run build
-            cd ..
-
-            # Zip the directory
-            tar -C backend -czvf artifact.tar.gz .
-            cd .circleci/ansible
-            echo "Contents  of the inventory.txt file is -------"
-            cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml
+            # your code here
       # Here's where you will add some code to rollback on failure  
 workflows:
   uda-peapole-workflow:
     jobs:
 
-      - deploy-backend
+      - build-frontend
+      - build-backend
+      - deploy-infrastructure:
+          requires: [build-frontend, build-backend]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
+      - deploy-frontend:
+          requires: [run-migrations]
