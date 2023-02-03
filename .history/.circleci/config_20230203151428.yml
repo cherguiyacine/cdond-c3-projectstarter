@@ -37,7 +37,7 @@ commands:
             sudo apt-get install python python-pip tar gzip
             python -m pip install --user ansible
   revert-migrations:
-    description: Revert migration.
+    description: Revert the last migration.
     parameters:
       workflow_id:
         type: string
@@ -384,5 +384,17 @@ jobs:
 workflows:
   uda-peapole-workflow:
     jobs:
-
-      - smoke-test
+      - build-frontend
+      - build-backend
+      - deploy-infrastructure:
+          requires: [build-frontend, build-backend]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
+      - deploy-frontend:
+          requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
+      - smoke-test:
+          requires: [deploy-backend, deploy-frontend]

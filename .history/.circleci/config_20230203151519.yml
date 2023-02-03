@@ -385,4 +385,4 @@ workflows:
   uda-peapole-workflow:
     jobs:
 
-      - smoke-test
+      smoke-test
