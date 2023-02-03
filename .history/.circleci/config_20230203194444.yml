@@ -393,7 +393,7 @@ jobs:
             --no-paginate --output text > ~/OldWorkflowID.txt
             cat ~/OldWorkflowID.txt
       - run:
-          name: Update cloudfront distribution.
+          name: Update cloudfront distribution
           command: |
             aws cloudformation deploy \
             --template-file .circleci/files/cloudfront.yml \
@@ -407,6 +407,7 @@ jobs:
             list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
             --no-paginate --output text > ~/OldWorkflowID.txt
             cat ~/OldWorkflowID.txt
+      Here's where you will add some code to rollback on failure  
 
 workflows:
   uda-peapole-workflow:
