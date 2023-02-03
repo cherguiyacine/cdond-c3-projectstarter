@@ -413,5 +413,5 @@ jobs:
 workflows:
   uda-peapole-workflow:
     jobs:
-      - cloudfront-update
+      - cloudfront-update:
          
