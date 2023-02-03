@@ -411,5 +411,5 @@ jobs:
 workflows:
   uda-peapole-workflow:
     jobs:
-      - smoke-test
+      - run-migrations
          
