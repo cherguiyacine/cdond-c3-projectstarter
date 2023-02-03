@@ -372,7 +372,7 @@ jobs:
             if curl --connect-timeout 6 ${URL} | grep "Welcome"
             then
               # Change this to 0 after the job fails
-              return 0
+              return 1
             else
               return 1
             fi
@@ -394,7 +394,7 @@ jobs:
             unzip -qq awscliv2.zip
             sudo ./aws/install
       - run: 
-          name: initial bucket ID
+          name:
           command: 
             aws cloudformation \
             list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
@@ -408,13 +408,6 @@ jobs:
             --stack-name InitialStack \
             --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
             --tags project=udapeople
-      - run: 
-          name: New bucket ID
-          command: 
-            aws cloudformation \
-            list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-            --no-paginate --output text > ~/OldWorkflowID.txt
-            cat ~/OldWorkflowID.txt
       # Here's where you will add some code to rollback on failure  
 
 workflows:
@@ -434,7 +427,3 @@ workflows:
           requires: [run-migrations]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
-      - cloudfront-end:
-          requires: [smoke-test]
-
-         
